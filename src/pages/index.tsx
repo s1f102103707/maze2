@@ -26,6 +26,11 @@ const Home = () => {
     newMaze.map((row: number[], y: number) => {
       row.map((color: number, x: number) => {
         if (newMaze[y][x] === 1) {
+          const randomDirectionIndex = Math.floor(Math.random() * directions.length);
+          const [dy, dx] = directions[randomDirectionIndex];
+          const newX = x + dx;
+          const newY = y + dy;
+          newMaze[newY][newX] = 2;
         }
       });
     });
