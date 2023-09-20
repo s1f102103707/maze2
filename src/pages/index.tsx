@@ -21,6 +21,12 @@ const Home = () => {
     [0, -1],
     [-1, 0],
   ];
+
+  const [human, setHuman] = useState({
+    x: 0,
+    y: 0,
+    forward: [1, 0],
+  });
   const onClick = () => {
     const newMaze = JSON.parse(JSON.stringify(maze));
     newMaze.map((row: number[], y: number) => {
