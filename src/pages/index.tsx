@@ -34,9 +34,25 @@ const Home = () => {
         }
       });
     });
+    setMaze(newMaze);
+    const updatedMaze = JSON.parse(JSON.stringify(newMaze));
+    updatedMaze.map((row: number[], y: number) => {
+      row.map((color: number, x: number) => {
+        if (color === 2) {
+          updatedMaze[y][x] = 1;
+        }
+      });
+    });
+    setMaze(updatedMaze);
   };
 
-  return <div className={styles.board}></div>;
+  return (
+    <div className={styles.board}>
+      <button className={styles.generate} onClick={() => onClick()}>
+        生成
+      </button>
+    </div>
+  );
 };
 
 export default Home;
