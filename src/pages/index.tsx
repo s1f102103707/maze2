@@ -37,8 +37,6 @@ const Home = () => {
     forward: [1, 0],
   });
 
-  const [showGoalDialog, setShowGoalDialog] = useState(false); //ゴール後につかう
-
   const onClick = () => {
     const newMaze = JSON.parse(JSON.stringify(initialMaze));
     const initialHuman = {
@@ -47,7 +45,6 @@ const Home = () => {
       forward: [1, 0],
     };
     setHuman(initialHuman);
-    setShowGoalDialog(true);
     console.log('initialmap');
     console.table(newMaze);
     newMaze.map((row: number[], y: number) => {
@@ -130,7 +127,6 @@ const Home = () => {
     const { x, y, forward } = human;
     if (x === maze.length - 1 && y === maze[0].length - 1) {
       alert('goal');
-      setShowGoalDialog(false);
       onClick();
       return;
     }
@@ -178,12 +174,6 @@ const Home = () => {
       Rightmove();
       console.log('rightside');
     }
-
-    const handleGoalDialogClose = () => {
-      // ダイアログを閉じるときに「生成」ボタンをクリック
-      setShowGoalDialog(false);
-      onClick(); // 生成ボタンの処理を呼び出す
-    };
   };
   return (
     <div className={styles.container}>
