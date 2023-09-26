@@ -190,7 +190,7 @@ const Home = () => {
         clearInterval(interval);
       };
     }
-  }, [searching, human.x, human.y, maze, MoveHuman]);
+  });
 
   return (
     <div className={styles.container}>
