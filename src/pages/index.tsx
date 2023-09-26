@@ -184,7 +184,7 @@ const Home = () => {
         if (human.x === maze.length - 1 && human.y === maze[0].length - 1) {
           setSearching(false);
         }
-      }, 100);
+      }, 150);
 
       return () => {
         clearInterval(interval);
