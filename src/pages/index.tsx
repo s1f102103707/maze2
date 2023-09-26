@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.css';
 const Home = () => {
   const blankMaze = [
@@ -100,6 +100,7 @@ const Home = () => {
     MoveHuman();
     console.log(human);
   };
+
   const gomove = () => {
     const { x, y, forward } = human;
     const [dx, dy] = forward;
@@ -126,7 +127,7 @@ const Home = () => {
   const MoveHuman = () => {
     const { x, y, forward } = human;
     if (x === maze.length - 1 && y === maze[0].length - 1) {
-      alert('goal');
+      alert('ゴールしました！新しい迷路を生成します。');
       onClick();
       return;
     }
@@ -160,8 +161,6 @@ const Home = () => {
       console.log(newY, newX);
     } else if (
       goX >= 0 &&
-      // goX !== undefined &&
-      // goY !== undefined &&
       goX < maze.length &&
       goY >= 0 &&
       goY < maze[0].length &&
@@ -175,6 +174,24 @@ const Home = () => {
       console.log('rightside');
     }
   };
+
+  const [searching, setSearching] = useState(false);
+
+  useEffect(() => {
+    if (searching) {
+      const interval = setInterval(() => {
+        MoveHuman();
+        if (human.x === maze.length - 1 && human.y === maze[0].length - 1) {
+          setSearching(false);
+        }
+      }, 100);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [searching, human.x, human.y, maze, MoveHuman]);
+
   return (
     <div className={styles.container}>
       <button className={styles.generate} onClick={() => onClick()}>
@@ -182,6 +199,9 @@ const Home = () => {
       </button>
       <button className={styles.search} onClick={() => onClickSearch()}>
         探索
+      </button>
+      <button className={styles.search} onClick={() => setSearching(true)}>
+        自動探索
       </button>
       <div className={styles.board} style={{ backgroundColor: '#000' }}>
         {maze.map((row, x) =>
@@ -193,8 +213,7 @@ const Home = () => {
             >
               {human.x === x && human.y === y && (
                 <div className={styles.position} key={`${human.x}- ${human.y}`} />
-              )}{' '}
-              {`${y}-${x}`}
+              )}
             </div>
           ))
         )}

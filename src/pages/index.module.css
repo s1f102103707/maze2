@@ -41,7 +41,51 @@
 }
 
 .position {
-  background-color: aqua;
-  width: 100%;
-  height: 100%;
+  background-color: green;
+  display: flex;
+  width: 80px;
+  height: 80px;
+  border: 1px solid white;
+  margin: 0;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  margin: auto;
+  position: relative;
+}
+
+.triangle-up,
+.triangle-down,
+.triangle-right,
+.triangle-left {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.triangle-up {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #f00;
+}
+
+.triangle-right {
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #f00;
+}
+
+.triangle-down {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid #f00;
+}
+
+.triangle-left {
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 15px solid #f00;
 }
